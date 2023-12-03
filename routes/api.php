@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\CatController;
 use App\Http\Controllers\CodeController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubController;
+use App\Http\Controllers\TopicController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +26,8 @@ Route::apiResource('info',InfoController::class);
 Route::apiResource('cat',CatController::class);
 Route::apiResource('sub',SubController::class);
 Route::apiResource('product',ProductController::class);
+Route::apiResource('topic',TopicController::class);
+Route::post('comment/{type}/{id}',[CommentController::class,'store']);
+Route::get('comment/{type}/{id}',[CommentController::class,'index']);
+Route::apiResource('comment',CommentController::class);
+Route::post('upload/image',[\App\Http\Controllers\AttachmentController::class,'image']);

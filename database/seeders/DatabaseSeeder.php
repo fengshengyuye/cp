@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -30,11 +31,25 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+
+
+        Comment::factory(2)->create();
+        Comment::find(2)->update([
+            'commentable_type'=>Comment::find(1)->commentable_type,
+            'commentable_id'=>Comment::find(1)->commentable_id,
+            'comment_id'=>1,
+            'reply_user_id'=>Comment::find(1)->user_id
+        ]);
+
+
+
         $this->call([
             InfoSeeder::class,
             CatSeeder::class,
             SubSeeder::class,
             ProductSeeder::class,
+            TopicSeeder::class,
         ]);
 
     }
